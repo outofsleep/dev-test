@@ -12,7 +12,7 @@ jobs:
     steps:
 
       - name: Create temp dir
-        run: |
+        run:
           mkdir -p /downloads
           cd /downloads
       - uses: actions/checkout@v2
