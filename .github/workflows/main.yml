@@ -13,12 +13,12 @@ jobs:
 
       - name: Create temp dir
         run:
-          mkdir -p /downloads
-          cd /downloads
+          mkdir downloads
+          cd downloads
       - uses: actions/checkout@v2
       - name: Copy artifacts
         run:  
-          cp release/ice-node.zip /downloads/
+          cp release/ice-node.zip downloads/
           apt-get update
           apt-get install unzip
           unzip ice-node.zip
