@@ -14,9 +14,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Copy artifacts
         run: |
-          mkdir downloads
-          cp release/ice-node.zip /downloads/
-          cd downloads
+          cp release/ice-node.zip .
           apt-get update
           apt-get install unzip
           unzip ice-node.zip
@@ -25,7 +23,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with: 
           name: ice-node
-          path: downloads
+          path: .
        
   deploy-rpc:
     needs: copy-artifacts
@@ -42,7 +40,7 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: ice-node
-          path: downloads
+          path: .
       - name: Deploy with rsync
         run: 
           ssh ${{ secrets.SSH_USER_RPC }}@${{ secrets.SSH_HOST_RPC }}
@@ -71,7 +69,7 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: artifact
-          path: downloads
+          path: .
       - name: Deploy with rsync
         run:
           ssh ${{ secrets.SSH_USER_VALID }}@${{ secrets.SSH_HOST_VALID }}
