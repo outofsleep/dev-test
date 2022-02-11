@@ -15,7 +15,7 @@ jobs:
       - name: Copy artifacts
         run: |
           mkdir downloads
-          cp release/ice-node.zip /downloads
+          cp release/ice-node.zip /downloads/
           cd downloads
           apt-get update
           apt-get install unzip
