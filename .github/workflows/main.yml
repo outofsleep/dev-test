@@ -12,13 +12,11 @@ jobs:
     steps:
 
       - uses: actions/checkout@v2
-      - name: Create a temporary artifact downloads directory
-        run: mkdir downloads
-                
       - name: Copy artifacts
         run: |
+          mkdir downloads
+          cp release/ice-node.zip /downloads
           cd downloads
-          cp release/ice-node.zip .
           apt-get update
           apt-get install unzip
           unzip ice-node.zip
