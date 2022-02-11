@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Copy artifacts
         run:  
-          cp release/ice-node.zip downloads/
+          cp release/* downloads/
           cd downloads
           apt-get update
           apt-get install unzip
