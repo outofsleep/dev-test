@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+      - uses: actions/checkout@v2
       - name: Create a temporary artifact downloads directory
         run: mkdir downloads
-        
-      - uses: actions/checkout@v2  
+                
       - name: Copy artifacts
         run: |
           cd downloads
