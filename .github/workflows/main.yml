@@ -45,16 +45,17 @@ jobs:
           name: ice-node
           path: downloads
       - name: Deploy with rsync
-        run: ssh ${{ secrets.SSH_USER_RPC }}@${{ secrets.SSH_HOST_RPC }}
-        run: systemctl stop rpc
-        run: rm -rvf /root/ice-node/ice-node
-        run: exit
-        run: rsync -avz downloads/* ${{ secrets.SSH_USER_RPC }}@${{ secrets.SSH_HOST_RPC }}:/root/ice-node/
-        run: ssh ${{ secrets.SSH_USER_RPC }}@${{ secrets.SSH_HOST_RPC }}
-        run: cd /root/ice-node/
-        run: chmod +x ice-node
-        run: ./ice-node purge-chain --base-path /tmp/alice/ --chain local
-        run: systemctl start rpc
+        run: 
+          ssh ${{ secrets.SSH_USER_RPC }}@${{ secrets.SSH_HOST_RPC }}
+          systemctl stop rpc
+          rm -rvf /root/ice-node/ice-node
+          exit
+          rsync -avz downloads/* ${{ secrets.SSH_USER_RPC }}@${{ secrets.SSH_HOST_RPC }}:/root/ice-node/
+          ssh ${{ secrets.SSH_USER_RPC }}@${{ secrets.SSH_HOST_RPC }}
+          cd /root/ice-node/
+          chmod +x ice-node
+          ./ice-node purge-chain --base-path /tmp/alice/ --chain local
+          systemctl start rpc
         
   deploy-validator:
     needs: deploy-rpc
@@ -73,13 +74,14 @@ jobs:
           name: artifact
           path: downloads
       - name: Deploy with rsync
-        run: ssh ${{ secrets.SSH_USER_VALID }}@${{ secrets.SSH_HOST_VALID }}
-        run: systemctl stop validator
-        run: rm -rvf /root/ice-node/ice-node
-        run: exit
-        run: rsync -avz downloads/* ${{ secrets.SSH_USER_VALID }}@${{ secrets.SSH_HOST_VALID }}:/root/ice-node/
-        run: ssh ${{ secrets.SSH_USER_VALID }}@${{ secrets.SSH_HOST_VALID }}
-        run: cd /root/ice-node/
-        run: chmod +x ice-node
-        run: ./ice-node purge-chain --base-path /tmp/bob/ --chain local
-        run: systemctl start validator
+        run:
+          ssh ${{ secrets.SSH_USER_VALID }}@${{ secrets.SSH_HOST_VALID }}
+          systemctl stop validator
+          rm -rvf /root/ice-node/ice-node
+          exit
+          rsync -avz downloads/* ${{ secrets.SSH_USER_VALID }}@${{ secrets.SSH_HOST_VALID }}:/root/ice-node/
+          ssh ${{ secrets.SSH_USER_VALID }}@${{ secrets.SSH_HOST_VALID }}
+          cd /root/ice-node/
+          chmod +x ice-node
+          ./ice-node purge-chain --base-path /tmp/bob/ --chain local
+          systemctl start validator
