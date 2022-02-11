@@ -11,10 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+      - name: Create temp dir
+        run: |
+          mkdir -p /downloads
+          cd /downloads
       - uses: actions/checkout@v2
       - name: Copy artifacts
-        run: |
-          cp release/ice-node.zip .
+          cp release/ice-node.zip /downloads/
           apt-get update
           apt-get install unzip
           unzip ice-node.zip
