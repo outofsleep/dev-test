@@ -1,0 +1,75 @@
+#ice-substrate artifact deployment on dev environments
+name: ice-substrate artifact deployment on dev environments
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+       
+  copy-artifacts:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Create a temporary artifact downloads directory
+        run: mkdir downloads
+        
+      - name: Copy artifacts
+        run: |
+          cd downloads
+          cp /release/ice-node.zip .
+          apt-get update
+          apt-get install unzip
+          unzip ice-node.zip
+          rm -rvf ice-node.zip              
+      - name: Upload Artifact GitHub Action
+        uses: actions/upload-artifact@v2
+        with: 
+          name: ice-node
+          path: downloads
+       
+  deploy-rpc:
+    needs: copy-artifacts
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY_RPC }} 
+          known_hosts: 'just-a-placeholder-so-we-dont-get-errors'
+      - name: Adding Known Hosts
+        run: ssh-keyscan -H ${{ secrets.SSH_HOST_RPC }} >> ~/.ssh/known_hosts
+
+      - uses: actions/download-artifact@v2
+        with:
+          name: ice-node
+          path: downloads
+      - name: Deploy with rsync
+        run: systemctl stop rpc
+        run: rsync -avz downloads/* ${{ secrets.SSH_USER_RPC }}@${{ secrets.SSH_HOST_RPC }}:/root/ice-node/
+        run: cd /root/ice-node/
+        run: ./ice-node purge-chain --base-path /tmp/alice/ --chain local
+        run: systemctl start rpc
+        
+  deploy-validator:
+    needs: deploy-rpc
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY_VALID }} 
+          known_hosts: 'just-a-placeholder-so-we-dont-get-errors'
+      - name: Adding Known Hosts
+        run: ssh-keyscan -H ${{ secrets.SSH_HOST_VALID }} >> ~/.ssh/known_hosts
+
+      - uses: actions/download-artifact@v2
+        with:
+          name: artifact
+          path: downloads
+      - name: Deploy with rsync
+        run: systemctl stop validator
+        run: rsync -avz downloads/* ${{ secrets.SSH_USER_VALID }}@${{ secrets.SSH_HOST_VALID }}:/root/ice-node/
+        run: cd /root/ice-node/
+        run: ./ice-node purge-chain --base-path /tmp/bob/ --chain local
+        run: systemctl start validator
