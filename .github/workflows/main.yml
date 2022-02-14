@@ -62,7 +62,7 @@ jobs:
           script: sh /root/ice-node/rpcrestart.sh
         
          
-   deploy-rpc:
+   deploy-validator:
     needs: copy-artifacts
     runs-on: ubuntu-latest
     steps:
