@@ -14,11 +14,10 @@ jobs:
       - name: Create temp dir
         run:
           mkdir downloads
-      - uses: actions/checkout@v2
       - name: Copy artifacts
         run:  
-          cp files/8059273/* downloads/
           cd downloads/
+          wget https://github.com/outofsleep/dev-test/files/8059273/ice-node.zip
           apt-get update
           apt-get install unzip
           unzip ice-node.zip
