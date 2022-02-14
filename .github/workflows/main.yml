@@ -23,10 +23,7 @@ jobs:
           wget https://github.com/outofsleep/dev-test/files/8059273/ice-node.zip
       - name: unzip artifact
         run:
-          apt-get update
-          apt-get install unzip
           unzip ice-node.zip
-          rm -rvf ice-node.zip
       - name: Upload Artifact GitHub Action
         uses: actions/upload-artifact@v2
         with: 
