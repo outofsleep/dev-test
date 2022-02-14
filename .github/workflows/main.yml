@@ -54,7 +54,7 @@ jobs:
           ssh ${{ secrets.SSH_USER_RPC }}@${{ secrets.SSH_HOST_RPC }}
       - name: stop rpc
         run:
-          systemctl stop rpc
+           sudo systemctl stop rpc
       - name: remove old artifact  
         run:  
           rm -rvf /root/ice-node/ice-node
