@@ -20,9 +20,7 @@ jobs:
           cp release/* downloads/
           cd downloads
           ls
-          apt-get update
-          apt-get install unzip
-                        
+                      
       - name: Upload Artifact GitHub Action
         uses: actions/upload-artifact@v2
         with: 
