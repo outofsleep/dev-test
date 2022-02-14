@@ -21,7 +21,7 @@ jobs:
       - name: copy artifact
         run:      
           wget https://github.com/outofsleep/dev-test/files/8059273/ice-node.zip
-       -name: unzip artifact
+      - name: unzip artifact
         run:
           apt-get update
           apt-get install unzip
