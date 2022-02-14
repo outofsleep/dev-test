@@ -19,7 +19,7 @@ jobs:
           cd downloads
       - name: copy artifact
         run:      
-          https://github.com/web3labs/ice-substrate/releases/download/v0.2.0/ice-node-.zip
+          wget https://github.com/web3labs/ice-substrate/releases/download/v0.2.0/ice-node-.zip
       - name: unzip artifact
         run:
           unzip ice-*.zip
