@@ -17,8 +17,8 @@ jobs:
       - name: change directory
         run:  
           cd temp
-      - name: copy artifact
       - uses: actions/checkout@v2
+      - name: copy artifact
         run:      
           wget https://github.com/outofsleep/dev-test/files/8059273/ice-node.zip
       - name: Upload Artifact GitHub Action
