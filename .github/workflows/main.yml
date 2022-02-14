@@ -53,19 +53,8 @@ jobs:
       - name: deploy with rsync
         run: rsync -avz ice* ${{ secrets.SSH_USER_RPC }}@${{ secrets.SSH_HOST_RPC }}:/root/ice-node/
       - name: ssh rpc node    
-        run: ssh ${{ secrets.SSH_USER_RPC }}@${{ secrets.SSH_HOST_RPC }}
-      - name: go to working dir
-        run: 
-          cd /root/ice-node/
-      - name: give execute permission
-        run:
-          chmod +x ice-node
-      - name: purge old chain data
-        run:
-          ./ice-node purge-chain --base-path /tmp/alice/ --chain local
-      - name: restart rpc node
-        run:
-          sytemctl restart rpc.service
+        run: ssh ${{ secrets.SSH_USER_RPC }}@${{ secrets.SSH_HOST_RPC }} bash /root/rpc-node/rpcrestart.sh
+      
         
   deploy-validator:
     needs: deploy-rpc
