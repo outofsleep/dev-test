@@ -31,7 +31,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with: 
           name: ice-node
-          path: downloads
+          path: downloads/
        
   deploy-rpc:
     needs: copy-artifacts
@@ -48,7 +48,7 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: ice-node
-          path: downloads
+          path: downloads/
       - name: Deploy with rsync
         run: 
           ssh ${{ secrets.SSH_USER_RPC }}@${{ secrets.SSH_HOST_RPC }}
