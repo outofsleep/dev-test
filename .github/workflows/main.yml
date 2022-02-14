@@ -19,7 +19,7 @@ jobs:
           cd downloads
       - name: copy artifact
         run:      
-          wget https://github.com/outofsleep/dev-test/files/8059273/ice-node.zip
+          https://github.com/web3labs/ice-substrate/releases/download/v0.2.0/ice-node-.zip
       - name: unzip artifact
         run:
           unzip ice-node.zip
