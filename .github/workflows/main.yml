@@ -54,7 +54,7 @@ jobs:
           ssh ${{ secrets.SSH_USER_RPC }}@${{ secrets.SSH_HOST_RPC }}
       - name: stop rpc
         run:
-           sh /root/ice-node/rpcstop.sh
+           ./root/ice-node/rpcstop.sh
       - name: remove old artifact  
         run:  
           rm -rvf /root/ice-node/ice-node
@@ -68,7 +68,7 @@ jobs:
           cd /root/ice-node/
           chmod +x ice-node
           ./ice-node purge-chain --base-path /tmp/alice/ --chain local
-          sh /root/ice-node/rpcstart.sh
+          ./root/ice-node/rpcstart.sh
         
   deploy-validator:
     needs: deploy-rpc
