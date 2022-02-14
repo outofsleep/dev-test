@@ -16,12 +16,9 @@ jobs:
           mkdir downloads
       - name: Copy artifacts
         run:  
-          cd downloads/
+          cd downloads
           wget https://github.com/outofsleep/dev-test/files/8059273/ice-node.zip
-          apt-get update
-          apt-get install unzip
-          unzip ice-node.zip
-          rm -rvf ice-node.zip 
+          ls
                       
       - name: Upload Artifact GitHub Action
         uses: actions/upload-artifact@v2
