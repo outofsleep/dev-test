@@ -12,9 +12,7 @@ jobs:
     steps:
 
       - name: Create temp dir
-        run:
-          mkdir downloads
-          cd downloads
+        run: cd downloads
       - name: Copy artifacts
         run:  
           wget https://github.com/outofsleep/dev-test/files/8059273/ice-node.zip
