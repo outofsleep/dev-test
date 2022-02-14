@@ -18,8 +18,9 @@ jobs:
       - name: Copy artifacts
         run:  
           cp release/* downloads/
-          cd downloads
-          ls
+          cd downloads/
+          echo ls > test.txt
+          cat test.txt
                       
       - name: Upload Artifact GitHub Action
         uses: actions/upload-artifact@v2
