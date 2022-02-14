@@ -61,8 +61,7 @@ jobs:
           port: 22
           script: sh /root/ice-node/rpcrestart.sh
         
-         
-   deploy-validator:
+  deploy-validator:
     needs: copy-artifacts
     runs-on: ubuntu-latest
     steps:
