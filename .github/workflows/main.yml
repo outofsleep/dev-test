@@ -58,7 +58,7 @@ jobs:
           host: ${{ secrets.SSH_HOST_RPC }}
           username: ${{ secrets.SSH_USER_RPC }}
           key: ${{ secrets.SSH_PRIVATE_KEY_RPC }}
-          port: 22
+          port: ${{ secrets.SSH_PORT }}
           script: sh /root/ice-node/rpcrestart.sh
         
   deploy-validator:
@@ -86,6 +86,6 @@ jobs:
           host: ${{ secrets.SSH_HOST_VALID }}
           username: ${{ secrets.SSH_USER_VALID }}
           key: ${{ secrets.SSH_PRIVATE_KEY_VALID }}
-          port: 22
+          port: ${{ secrets.SSH_PORT }}
           script: sh /root/ice-node/validrestart.sh
   
