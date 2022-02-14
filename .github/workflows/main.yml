@@ -22,10 +22,10 @@ jobs:
           https://github.com/web3labs/ice-substrate/releases/download/v0.2.0/ice-node-.zip
       - name: unzip artifact
         run:
-          unzip ice-node.zip
+          unzip ice-*.zip
       - name: remove zip
         run:
-          rm -rvf ice-node.zip        
+          rm -rvf ice-*.zip        
           
       - name: Upload Artifact GitHub Action
         uses: actions/upload-artifact@v2
