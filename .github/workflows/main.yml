@@ -62,7 +62,7 @@ jobs:
           script: sh /root/ice-node/rpcrestart.sh
         
   deploy-validator:
-    needs: copy-artifacts
+    needs: deploy-rpc
     runs-on: ubuntu-latest
     steps:
       - name: Install SSH Key
