@@ -53,7 +53,7 @@ jobs:
       - name: deploy with rsync
         run: rsync -avz ice* ${{ secrets.SSH_USER_RPC }}@${{ secrets.SSH_HOST_RPC }}:/root/ice-node/
       - name: ssh rpc node    
-        run: ssh ${{ secrets.SSH_USER_RPC }}@${{ secrets.SSH_HOST_RPC }} bash /root/rpc-node/rpcrestart.sh
+        run: ssh ${{ secrets.SSH_USER_RPC }}@${{ secrets.SSH_HOST_RPC }} /root/rpc-node/rpcrestart.sh
       
         
   deploy-validator:
