@@ -11,12 +11,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: Create temp dir
+      - name: Create downloads dir
         run: 
-          mkdir temp
+          mkdir downloads
       - name: change directory
         run:  
-          cd temp
+          cd downloads
       - uses: actions/checkout@v2
       - name: copy artifact
         run:      
