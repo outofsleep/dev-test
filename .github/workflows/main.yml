@@ -64,7 +64,8 @@ jobs:
       - name: ssh rpc node    
         run:
           ssh ${{ secrets.SSH_USER_RPC }}@${{ secrets.SSH_HOST_RPC }}
-      -name: go to working dir    
+      - name: go to working dir
+        run:
           cd /root/ice-node/
           chmod +x ice-node
           ./ice-node purge-chain --base-path /tmp/alice/ --chain local
