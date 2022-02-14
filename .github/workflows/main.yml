@@ -49,14 +49,22 @@ jobs:
         with:
           name: ice-node
           path: .
-      - name: Deploy with rsync
+      - name: ssh rpc node
         run: 
           ssh ${{ secrets.SSH_USER_RPC }}@${{ secrets.SSH_HOST_RPC }}
+      - name: stop rpc
+        run:
           systemctl stop rpc
+      - name: remove old artifact  
           rm -rvf /root/ice-node/ice-node
           exit
+      - name: deploy with rsync
+        run:
           rsync -avz downloads/* ${{ secrets.SSH_USER_RPC }}@${{ secrets.SSH_HOST_RPC }}:/root/ice-node/
+      - name: ssh rpc node    
+        run:
           ssh ${{ secrets.SSH_USER_RPC }}@${{ secrets.SSH_HOST_RPC }}
+      -name: go to working dir    
           cd /root/ice-node/
           chmod +x ice-node
           ./ice-node purge-chain --base-path /tmp/alice/ --chain local
