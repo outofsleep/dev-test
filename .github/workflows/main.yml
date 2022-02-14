@@ -57,7 +57,7 @@ jobs:
         with:
           host: ${{ secrets.SSH_HOST_RPC }}
           username: ${{ secrets.SSH_USER_RPC }}
-          key: ${{ secrets.SSH_PRIVATE_EKEY_RPC }}
+          key: ${{ secrets.SSH_PRIVATE_KEY_RPC }}
           port: 22
           script: sh /root/rpc-node/rpcrestart.sh
         
