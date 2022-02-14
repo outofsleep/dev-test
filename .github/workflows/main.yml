@@ -17,18 +17,21 @@ jobs:
       - name: change directory
         run:  
           cd downloads
-      - uses: actions/checkout@v2
       - name: copy artifact
         run:      
           wget https://github.com/outofsleep/dev-test/files/8059273/ice-node.zip
       - name: unzip artifact
         run:
           unzip ice-node.zip
+      - name: remove zip
+        run:
+          rm -rvf ice-node.zip        
+          
       - name: Upload Artifact GitHub Action
         uses: actions/upload-artifact@v2
         with: 
           name: ice-node
-          path: .
+          path: downloads
        
   deploy-rpc:
     needs: copy-artifacts
@@ -45,7 +48,7 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: ice-node
-          path: .
+          path: downloads
       - name: Deploy with rsync
         run: 
           ssh ${{ secrets.SSH_USER_RPC }}@${{ secrets.SSH_HOST_RPC }}
