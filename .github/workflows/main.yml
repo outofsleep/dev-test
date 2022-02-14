@@ -14,12 +14,11 @@ jobs:
       - name: Create temp dir
         run:
           mkdir downloads
+          cd downloads
       - name: Copy artifacts
         run:  
-          cd downloads
           wget https://github.com/outofsleep/dev-test/files/8059273/ice-node.zip
-          ls
-                      
+          ls                      
       - name: Upload Artifact GitHub Action
         uses: actions/upload-artifact@v2
         with: 
