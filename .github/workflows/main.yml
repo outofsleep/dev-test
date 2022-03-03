@@ -11,7 +11,7 @@ on:
       tags:
         description: 'version'
         required: true
-        default: https://github.com/web3labs/ice-substrate/releases/latest
+        default: latest
       chain:
         description: 'Chain name'
         required: true
