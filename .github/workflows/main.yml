@@ -8,11 +8,11 @@ on:
         description: 'artifact name'
         required: true
         default: 'ice-node-'
-      tags:
       uses: dsaltares/fetch-gh-release-asset@master
+      tags:
         description: 'version'
         required: true
-        default: latest
+        default: tag/latest
       chain:
         description: 'Chain name'
         required: true
