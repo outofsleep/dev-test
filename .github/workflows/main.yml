@@ -9,9 +9,10 @@ on:
         required: true
         default: 'ice-node-'
       tags:
-        description: 'tag name'
+      uses: dsaltares/fetch-gh-release-asset@master
+        description: 'version'
         required: true
-        default: 'v0.2.0'
+        default: latest
       chain:
         description: 'Chain name'
         required: true
