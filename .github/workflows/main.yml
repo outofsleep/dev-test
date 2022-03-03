@@ -11,7 +11,7 @@ on:
       tags:
         description: 'version'
         required: true
-        default: release/tags/latest
+        default: 'release/tags/latest'
       chain:
         description: 'Chain name'
         required: true
