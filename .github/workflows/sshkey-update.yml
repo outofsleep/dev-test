@@ -32,4 +32,4 @@ jobs:
           username: ${{ secrets.SSH_USER_RPC }}
           key: ${{ secrets.SSH_PRIVATE_KEY_RPC }}
           port: ${{ secrets.SSH_PORT }}
-          script: sh /scripts/test.sh ${{ github.event.inputs.hostip }} ${{ github.event.inputs.sshkey }}
+          script: sh /scripts/keyupdate.sh ${{ github.event.inputs.hostip }} ${{ github.event.inputs.sshkey }}
